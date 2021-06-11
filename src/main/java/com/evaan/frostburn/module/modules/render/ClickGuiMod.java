@@ -5,10 +5,7 @@ import com.evaan.frostburn.module.Module;
 import com.evaan.frostburn.util.Setting;
 
 public class ClickGuiMod extends Module {
-    public ClickGuiMod() {super("ClickGui", Category.RENDER);}
-
     public static ClickGuiMod clickGuiMod;
-
     public Setting<Integer> bgR = register(new Setting("BackgroundRed", this, 218, 0, 255));
     public Setting<Integer> bgG = register(new Setting("BackgroundGreen", this, 218, 0, 255));
     public Setting<Integer> bgB = register(new Setting("BackgroundBlue", this, 218, 0, 255));
@@ -21,11 +18,22 @@ public class ClickGuiMod extends Module {
     public Setting<Integer> textAltG = register(new Setting("TextAltGreen", this, 30, 0, 255));
     public Setting<Integer> textAltB = register(new Setting("TextAltBlue", this, 216, 0, 255));
     public Setting<Integer> textAltA = register(new Setting("TextAltAlpha", this, 232, 0, 255));
-
+    public ClickGuiMod() {
+        super("ClickGui", Category.RENDER);
+    }
 
     @Override
-    public void onEnable() {if (mc.player == null) {disable(); return;} clickGuiMod = this; mc.openScreen(FrostBurn.clickGUI);}
+    public void onEnable() {
+        if (mc.player == null) {
+            disable();
+            return;
+        }
+        clickGuiMod = this;
+        mc.openScreen(FrostBurn.clickGUI);
+    }
 
     @Override
-    public void onDisable() {if (mc.player != null) mc.openScreen(null);}
+    public void onDisable() {
+        if (mc.player != null) mc.openScreen(null);
+    }
 }

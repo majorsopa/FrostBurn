@@ -15,17 +15,6 @@ public class Setting<T> {
     ArrayList<T> options;
     Type type;
 
-    public String getName() {return name;}
-    public Module getParent() {return parent;}
-    public T getValue() {return value;}
-    public T getDefaultVal() {return defaultVal;}
-    public T getMin() {return min;}
-    public T getMax() {return max;}
-    public ArrayList<T> getOptions() {return options;}
-    public Type getType() {return type;}
-
-    public void setValue(T value) {this.value = value;}
-
     public Setting(String name, Module parent, T value) {
         this.name = name;
         this.parent = parent;
@@ -52,6 +41,42 @@ public class Setting<T> {
         this.defaultVal = value;
         this.options = options;
         this.type = Type.STRING;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Module getParent() {
+        return parent;
+    }
+
+    public T getValue() {
+        return value;
+    }
+
+    public void setValue(T value) {
+        this.value = value;
+    }
+
+    public T getDefaultVal() {
+        return defaultVal;
+    }
+
+    public T getMin() {
+        return min;
+    }
+
+    public T getMax() {
+        return max;
+    }
+
+    public ArrayList<T> getOptions() {
+        return options;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public String getCorrectString(String stringIn) {

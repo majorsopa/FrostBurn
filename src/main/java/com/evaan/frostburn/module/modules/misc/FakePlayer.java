@@ -12,11 +12,16 @@ import java.util.UUID;
  * https://github.com/evaan
  */
 public class FakePlayer extends Module {
-    public FakePlayer() {super("FakePlayer", Category.MISC);}
+    public FakePlayer() {
+        super("FakePlayer", Category.MISC);
+    }
 
     @Override
     public void onEnable() {
-        if (mc.world == null || mc.player == null) {disable(); return;}
+        if (mc.world == null || mc.player == null) {
+            disable();
+            return;
+        }
         OtherClientPlayerEntity player = new OtherClientPlayerEntity(mc.world, new GameProfile(UUID.fromString("0f75a81d-70e5-43c5-b892-f33c524284f2"), "popbob"));
         player.copyPositionAndRotation(mc.player);
         player.setHeadYaw(mc.player.headYaw);

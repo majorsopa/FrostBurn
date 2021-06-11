@@ -61,7 +61,7 @@ public class ClickGui extends Screen implements Wrapper {
     }
 
     public void drawGradient(MatrixStack matrices, double left, double top, double right, double bottom, int startColor, int endColor) {
-        fillGradient(matrices, (int)left, (int)top, (int)right, (int)bottom, startColor, endColor);
+        fillGradient(matrices, (int) left, (int) top, (int) right, (int) bottom, startColor, endColor);
     }
 
     @Override
@@ -72,18 +72,13 @@ public class ClickGui extends Screen implements Wrapper {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
-        if (amount < 0)
-        {
-            for (Window window : windows)
-            {
-                window.setY((int)(window.getY() - 8));
+        if (amount < 0) {
+            for (Window window : windows) {
+                window.setY((int) (window.getY() - 8));
             }
-        }
-        else if (amount > 0)
-        {
-            for (Window window : windows)
-            {
-                window.setY((int)(window.getY() + 8));
+        } else if (amount > 0) {
+            for (Window window : windows) {
+                window.setY((int) (window.getY() + 8));
             }
         }
         return super.mouseScrolled(mouseX, mouseY, amount);

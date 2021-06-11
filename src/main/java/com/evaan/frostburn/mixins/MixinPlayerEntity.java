@@ -16,7 +16,7 @@ public class MixinPlayerEntity {
 
     @Inject(method = "clipAtLedge()Z", at = @At("HEAD"), cancellable = true)
     private void clipAtLedge(CallbackInfoReturnable<Boolean> cir) {
-        if(ModuleManager.getModule("SafeWalk").isEnabled()) cir.setReturnValue(true);
+        if (ModuleManager.getModule("SafeWalk").isEnabled()) cir.setReturnValue(true);
     }
 
 
@@ -26,7 +26,7 @@ public class MixinPlayerEntity {
         if (player == null) return;
 
         // Negate fall damage
-        if(ModuleManager.getModule("NoFall").isEnabled()) {
+        if (ModuleManager.getModule("NoFall").isEnabled()) {
             PlayerMoveC2SPacket packet = new PlayerMoveC2SPacket.OnGroundOnly(true);
             player.networkHandler.sendPacket(packet);
         }

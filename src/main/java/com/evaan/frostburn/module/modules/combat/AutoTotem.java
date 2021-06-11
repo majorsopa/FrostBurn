@@ -10,7 +10,9 @@ import net.minecraft.screen.slot.SlotActionType;
  * https://github.com/majorsopa
  */
 public class AutoTotem extends Module {
-    public AutoTotem() {super("AutoTotem", Category.COMBAT);}
+    public AutoTotem() {
+        super("AutoTotem", Category.COMBAT);
+    }
 
     @Override
     public void onUpdate() {

@@ -7,8 +7,6 @@ import net.minecraft.item.Items;
 import net.minecraft.screen.slot.SlotActionType;
 
 public class Offhand extends Module {
-    public Offhand() {super("Offhand", Category.MISC);}
-
     Setting<Boolean> totemOnFall = register(
             new Setting(
                     "TotemOnFall",
@@ -41,6 +39,9 @@ public class Offhand extends Module {
                     false
             )
     );
+    public Offhand() {
+        super("Offhand", Category.MISC);
+    }
 
     @Override
     public void onUpdate() {
@@ -49,7 +50,7 @@ public class Offhand extends Module {
         if ((mc.player.getAbsorptionAmount() + mc.player.getHealth() <= totemSwapHealth.getValue()) ||
                 (totemOnFall.getValue() && mc.player.fallDistance >= fallDistance.getValue())) {
             itemSwap(Items.TOTEM_OF_UNDYING);
-        }  else if (offhandCrystal.getValue()) {
+        } else if (offhandCrystal.getValue()) {
             itemSwap(Items.END_CRYSTAL);
         }
     }

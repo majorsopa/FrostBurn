@@ -12,11 +12,14 @@ import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
  * https://github.com/evaan
  */
 public class Velocity extends Module {
-    public Velocity() {super("Velocity", Category.MISC);}
-
     @EventHandler
     private final Listener<PacketEvent.Receive> packetListener = new Listener<>(event -> {
-        if (event.getPacket() instanceof EntityVelocityUpdateS2CPacket && ((EntityVelocityUpdateS2CPacket) event.getPacket()).getId() == mc.player.getId()) event.cancel();
+        if (event.getPacket() instanceof EntityVelocityUpdateS2CPacket && ((EntityVelocityUpdateS2CPacket) event.getPacket()).getId() == mc.player.getId())
+            event.cancel();
         else if (event.getPacket() instanceof ExplosionS2CPacket) event.cancel();
     });
+
+    public Velocity() {
+        super("Velocity", Category.MISC);
+    }
 }

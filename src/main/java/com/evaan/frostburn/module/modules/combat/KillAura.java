@@ -17,48 +17,50 @@ import java.util.stream.Collectors;
  * https://github.com/evaan
  */
 public class KillAura extends Module {
-    public KillAura() {super("KillAura", Category.COMBAT);}
-    
     Setting<Float> range = register(new Setting("Range", this, 4.0f, 0.1f, 6.0f));
     Setting<Boolean> switchItem = register(new Setting("Switch", this, true));
     Setting<Boolean> allEntities = register(new Setting("AllEntities", this, true));
     Setting<Boolean> multiAura = register(new Setting("Multi", this, true));
     Setting<Boolean> spam = register(new Setting("Spam", this, false));
-    
+    public KillAura() {
+        super("KillAura", Category.COMBAT);
+    }
+
     //todo rotate
 
     @Override
     public void onUpdate() {
         if (mc.player == null || mc.world == null) return;
-        if(mc.player.getAttackCooldownProgress(0) < 1 && spam.getValue()) return;
-        
+        if (mc.player.getAttackCooldownProgress(0) < 1 && spam.getValue()) return;
+
         try {
-	    	List<Entity> filtered;
-	    	if(!allEntities.getValue()) {
-	    		filtered = Streams.stream(mc.world.getEntities()).filter(e -> e instanceof PlayerEntity && mc.player.distanceTo(e) <= range.getValue() && e != mc.player).collect(Collectors.toList());
-	    	} else {
-	    		filtered = Streams.stream(mc.world.getEntities()).filter(e -> e instanceof Entity && mc.player.distanceTo(e) <= range.getValue() && e != mc.player).collect(Collectors.toList());
-	    	}
-	        
-	    	for(Entity entity : filtered) {
-	    		if(entity != null) {
-	    			// Don't attack dead/non living entities, ones we can't attack, and end crystals
-	    			if(entity.isLiving() && entity.isAttackable() && !(entity.getClass() == EndCrystalEntity.class)) {
-		                if (switchItem.getValue()) {
-		                    for (int i = 0; i < 9; i++) {
-		                        if (mc.player.getInventory().getStack(i).getItem() instanceof SwordItem)
-		                            mc.player.getInventory().selectedSlot = i;
-		                    }
-		                }
-		                
-		                mc.interactionManager.attackEntity(mc.player, entity);
-		                mc.player.swingHand(Hand.MAIN_HAND);
-		                
-		                if(!multiAura.getValue()) break;
- 	    			}
-	            }
-	    	}
-        	
-        } catch (Exception ignored) {}
+            List<Entity> filtered;
+            if (!allEntities.getValue()) {
+                filtered = Streams.stream(mc.world.getEntities()).filter(e -> e instanceof PlayerEntity && mc.player.distanceTo(e) <= range.getValue() && e != mc.player).collect(Collectors.toList());
+            } else {
+                filtered = Streams.stream(mc.world.getEntities()).filter(e -> e instanceof Entity && mc.player.distanceTo(e) <= range.getValue() && e != mc.player).collect(Collectors.toList());
+            }
+
+            for (Entity entity : filtered) {
+                if (entity != null) {
+                    // Don't attack dead/non living entities, ones we can't attack, and end crystals
+                    if (entity.isLiving() && entity.isAttackable() && !(entity.getClass() == EndCrystalEntity.class)) {
+                        if (switchItem.getValue()) {
+                            for (int i = 0; i < 9; i++) {
+                                if (mc.player.getInventory().getStack(i).getItem() instanceof SwordItem)
+                                    mc.player.getInventory().selectedSlot = i;
+                            }
+                        }
+
+                        mc.interactionManager.attackEntity(mc.player, entity);
+                        mc.player.swingHand(Hand.MAIN_HAND);
+
+                        if (!multiAura.getValue()) break;
+                    }
+                }
+            }
+
+        } catch (Exception ignored) {
+        }
     }
 }

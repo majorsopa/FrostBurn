@@ -16,15 +16,14 @@ import java.util.ArrayList;
  */
 public class Dropdown {
 
+    private static int modY = 0;
     private final double W;
     private final double H;
-    public double X;
-    public double Y;
     private final Module module;
     private final ModuleButton moduleButton;
-    private static int modY = 0;
-
     private final ArrayList<SettingButton> buttons = new ArrayList<>();
+    public double X;
+    public double Y;
 
     public Dropdown(ModuleButton mButton, Module module, double x, double y, double w, double h) {
         X = x;
@@ -77,7 +76,7 @@ public class Dropdown {
         modY = 0;
         int boost = 0;
 
-        for (SettingButton button : buttons){
+        for (SettingButton button : buttons) {
             ++boost;
             button.setX(X);
             button.setY(Y + (boost * H));
@@ -117,7 +116,7 @@ public class Dropdown {
     //Returns boost multiplied by the height. Used for adding to the main height.
     public double getBoost() {
         ///return (int)(moduleButton.getDropdownProgressPercentage() * (modY*H))/100;
-        return modY*H;
+        return modY * H;
     }
 
 }

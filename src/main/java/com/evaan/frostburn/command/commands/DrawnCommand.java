@@ -8,7 +8,9 @@ import com.evaan.frostburn.module.ModuleManager;
  * https://github.com/evaan
  */
 public class DrawnCommand extends Command {
-    public DrawnCommand() {super(new String[]{"drawn", "d"});}
+    public DrawnCommand() {
+        super(new String[]{"drawn", "d"});
+    }
 
     @Override
     public void onCommand(String[] args) {

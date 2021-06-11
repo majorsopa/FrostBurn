@@ -8,7 +8,10 @@ import com.evaan.frostburn.module.Module;
  * https://github.com/evaan
  */
 public class ImGuiMod extends Module {
-    public ImGuiMod() {super("ImGui", Category.RENDER); setBind(345);}
+    public ImGuiMod() {
+        super("ImGui", Category.RENDER);
+        setBind(345);
+    }
 
     @Override
     public void onEnable() {

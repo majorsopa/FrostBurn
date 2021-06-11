@@ -10,7 +10,9 @@ import net.minecraft.util.Formatting;
  * https://github.com/evaan
  */
 public class ModulesCommand extends Command {
-    public ModulesCommand() {super(new String[]{"modules", "mods"});}
+    public ModulesCommand() {
+        super(new String[]{"modules", "mods"});
+    }
 
     @Override
     public void onCommand(String[] args) {
@@ -19,6 +21,6 @@ public class ModulesCommand extends Command {
             if (module.isEnabled()) message += Formatting.GREEN + module.getName() + Formatting.WHITE + ", ";
             else message += Formatting.RED + module.getName() + Formatting.WHITE + ", ";
         }
-        sendMessage(message.substring(0, message.length()-2));
+        sendMessage(message.substring(0, message.length() - 2));
     }
 }

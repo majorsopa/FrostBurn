@@ -15,17 +15,21 @@ import java.util.ArrayList;
  * https://github.com/evaan
  */
 public class Surround extends Module {
-    public Surround() {super("Surround", Category.COMBAT);}
-
     int obiSlot;
     int oldSlot;
+    public Surround() {
+        super("Surround", Category.COMBAT);
+    }
 
     @Override
     public void onUpdate() {
         if (mc.player == null) return;
         oldSlot = mc.player.getInventory().selectedSlot;
         obiSlot = -1;
-        if (!mc.player.isOnGround()) {disable(); return;}
+        if (!mc.player.isOnGround()) {
+            disable();
+            return;
+        }
         ArrayList<BlockPos> positions = new ArrayList<>();
         positions.add(mc.player.getBlockPos().north());
         positions.add(mc.player.getBlockPos().east());
@@ -37,7 +41,10 @@ public class Surround extends Module {
                 break;
             }
         }
-        if (obiSlot == -1) {disable(); return;}
+        if (obiSlot == -1) {
+            disable();
+            return;
+        }
         for (BlockPos pos : positions) {
             if (!mc.world.getBlockState(pos).getMaterial().isReplaceable()) continue;
             for (Direction direction : Direction.values()) {

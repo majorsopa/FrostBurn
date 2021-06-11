@@ -12,12 +12,18 @@ public class Command {
     public static String prefix = ",";
 
     public String[] name;
-    public Command(String[] name) {this.name = name;}
-    public void onCommand(String[] args) {}
+
+    public Command(String[] name) {
+        this.name = name;
+    }
 
     public static void sendMessage(String message) {
-    	try {
-    		FrostBurn.mc.player.sendMessage(new LiteralText(Formatting.BLUE + "[FrostBurn] " + Formatting.WHITE + message), false);
-    	} catch (Exception e) {}
+        try {
+            FrostBurn.mc.player.sendMessage(new LiteralText(Formatting.BLUE + "[FrostBurn] " + Formatting.WHITE + message), false);
+        } catch (Exception e) {
+        }
+    }
+
+    public void onCommand(String[] args) {
     }
 }

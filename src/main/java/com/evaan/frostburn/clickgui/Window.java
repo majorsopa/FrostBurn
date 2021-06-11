@@ -19,17 +19,17 @@ import java.util.ArrayList;
  */
 public class Window implements Wrapper {
 
-    public String title;
-    public final Module.Category category;
     public static int[] buttonCounter = new int[]{1};
-    private final ArrayList<ModuleButton> buttons = new ArrayList<>();
+    public final Module.Category category;
     public final int W;
     public final int H;
+    private final ArrayList<ModuleButton> buttons = new ArrayList<>();
+    public String title;
     public double X;
     public double Y;
+    public boolean open = true;
     private double dragX;
     private double dragY;
-    public boolean open = true;
     private boolean dragging;
 
     public Window(Module.Category category, int x, int y, int w, int h) {
@@ -44,8 +44,7 @@ public class Window implements Wrapper {
         double yOffset = Y + H;
 
         //for each module from the category, initiate a module button and add it to buttons list
-        for (Module module : ModuleManager.getModulesInCategory(category))
-        {
+        for (Module module : ModuleManager.getModulesInCategory(category)) {
             ModuleButton button = new ModuleButton(module, X, yOffset, W, H);
             buttons.add(button);
             yOffset += H;
@@ -53,8 +52,7 @@ public class Window implements Wrapper {
         }
     }
 
-    public void render(MatrixStack matrices, int mX, int mY)
-    {
+    public void render(MatrixStack matrices, int mX, int mY) {
         //button counter not in use yet
         buttonCounter = new int[]{1};
 
@@ -68,15 +66,14 @@ public class Window implements Wrapper {
         FrostBurn.clickGUI.drawGradient(matrices, X, Y, X + W, Y + H, new Color(ClickGuiMod.clickGuiMod.bgR.getValue(), ClickGuiMod.clickGuiMod.bgG.getValue(), ClickGuiMod.clickGuiMod.bgB.getValue(), ClickGuiMod.clickGuiMod.bgA.getValue()).getRGB(), new Color(ClickGuiMod.clickGuiMod.bgR.getValue(), ClickGuiMod.clickGuiMod.bgG.getValue(), ClickGuiMod.clickGuiMod.bgB.getValue(), ClickGuiMod.clickGuiMod.bgA.getValue()).getRGB());//119
 
         //draw title string
-        textRenderer.draw(matrices, new LiteralText(category.getName()), (float)X + 4, (float)Y + 4, new Color(30, 30, 30).getRGB());
+        textRenderer.draw(matrices, new LiteralText(category.getName()), (float) X + 4, (float) Y + 4, new Color(30, 30, 30).getRGB());
 
         //return if it is closed
         if (!open) return;
 
         double modY = Y + H;
 
-        for (ModuleButton moduleButton : buttons)
-        {
+        for (ModuleButton moduleButton : buttons) {
             Window.buttonCounter[0] = buttonCounter[0] + 1;
             //draw moduleButton
             moduleButton.setX(X);
@@ -86,7 +83,7 @@ public class Window implements Wrapper {
             //if moduleButton is closed continue to next iteration
             //if (!moduleButton.isOpen()) continue;
 
-            if (moduleButton.isOpen()){
+            if (moduleButton.isOpen()) {
                 //set "dropdown" to reference the dropdown defined inside of moduleButton class
                 Dropdown dropdown = moduleButton.dropdown;
 
@@ -105,20 +102,16 @@ public class Window implements Wrapper {
         }
     }
 
-    public void mouseDown(double mX, double mY, int mB)
-    {
-        if (isHover(X, Y, W, H, mX, mY))
-        {
+    public void mouseDown(double mX, double mY, int mB) {
+        if (isHover(X, Y, W, H, mX, mY)) {
             if (mB == 0) {
                 dragging = true;
                 dragX = X - mX;
                 dragY = Y - mY;
-            }
-            else if (mB == 1) {
+            } else if (mB == 1) {
                 if (open) {
                     for (ModuleButton button : buttons) {
-                        if (button.isOpen())
-                        {
+                        if (button.isOpen()) {
                             button.processRightClick();
                         }
                     }
@@ -131,8 +124,8 @@ public class Window implements Wrapper {
 
         if (open)
             for (ModuleButton button : buttons) {
-                button.mouseDown((int)mX, (int)mY, mB);
-                button.dropdown.mouseDown((int)mX, (int)mY, mB);
+                button.mouseDown((int) mX, (int) mY, mB);
+                button.dropdown.mouseDown((int) mX, (int) mY, mB);
             }
     }
 
@@ -143,7 +136,7 @@ public class Window implements Wrapper {
     public void mouseUp(double mX, double mY) {
         dragging = false;
         if (!open) return;
-        buttons.forEach(button -> button.dropdown.mouseUp((int)mX, (int)mY));
+        buttons.forEach(button -> button.dropdown.mouseUp((int) mX, (int) mY));
     }
 
     public void keyPress(int key) {

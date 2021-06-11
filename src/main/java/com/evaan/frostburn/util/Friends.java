@@ -16,7 +16,7 @@ public class Friends {
     }
 
     public static Friends getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new Friends();
         return instance;
     }

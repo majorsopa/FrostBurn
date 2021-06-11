@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Nuker extends Module {
-    public Nuker() {super("Nuker", Category.MISC);}
-
     Setting<Boolean> faceBlock = register(
             new Setting(
                     "FaceBlock",
@@ -47,9 +45,12 @@ public class Nuker extends Module {
                     10f
             )
     );
-
-
     ArrayList<BlockPos> blocks = new ArrayList<>();
+
+
+    public Nuker() {
+        super("Nuker", Category.MISC);
+    }
 
     @Override
     public void onUpdate() {
@@ -72,7 +73,7 @@ public class Nuker extends Module {
             for (int x = negativeSideX; x <= positiveSideX; x++) {
                 for (int z = negativeSideZ; z <= positiveSideZ; z++) {
                     BlockPos bp = new BlockPos(x, y, z);
-                    if (mc.world.getBlockState(bp).getBlock() != Blocks.AIR){
+                    if (mc.world.getBlockState(bp).getBlock() != Blocks.AIR) {
                         blocks.add(bp);
                     }
                 }

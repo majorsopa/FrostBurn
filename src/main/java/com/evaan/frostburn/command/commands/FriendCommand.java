@@ -8,7 +8,9 @@ import com.evaan.frostburn.util.Friends;
  * https://github.com/evaan
  */
 public class FriendCommand extends Command {
-    public FriendCommand() {super(new String[]{"friend"});}
+    public FriendCommand() {
+        super(new String[]{"friend"});
+    }
 
     @Override
     public void onCommand(String[] args) {

@@ -3,10 +3,11 @@ package com.evaan.frostburn.module.modules.render;
 import com.evaan.frostburn.module.Module;
 
 public class Fullbright extends Module {
-    public Fullbright() {super("Fullbright", Category.RENDER);}
-
     boolean isExisting = false;
     double initalGamma;
+    public Fullbright() {
+        super("Fullbright", Category.RENDER);
+    }
 
     @Override
     public void onUpdate() {

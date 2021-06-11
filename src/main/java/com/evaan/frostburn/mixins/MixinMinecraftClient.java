@@ -20,7 +20,7 @@ import java.io.InputStream;
 public class MixinMinecraftClient {
 
     @Inject(method = "getWindowTitle", at = @At("HEAD"), cancellable = true)
-    public void getWindowTitle(CallbackInfoReturnable<String> ci){
+    public void getWindowTitle(CallbackInfoReturnable<String> ci) {
         ci.setReturnValue(FrostBurn.clientVersionString);
     }
 

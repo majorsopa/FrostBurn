@@ -10,7 +10,7 @@ import com.evaan.frostburn.module.ModuleManager;
  */
 public class ToggleCommand extends Command {
     public ToggleCommand() {
-    	super(new String[]{"toggle", "t"});
+        super(new String[]{"toggle", "t"});
     }
 
     @Override
@@ -19,10 +19,10 @@ public class ToggleCommand extends Command {
             sendMessage("Usage: toggle <Module>");
             return;
         }
-        
+
         Module module = ModuleManager.getModule(args[1]);
-        if(module != null) {
-        	module.toggle();
+        if (module != null) {
+            module.toggle();
         } else sendMessage("Module not found!");
     }
 }

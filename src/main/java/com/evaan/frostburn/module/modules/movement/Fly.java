@@ -5,8 +5,6 @@ import com.evaan.frostburn.util.Setting;
 import net.minecraft.entity.player.PlayerAbilities;
 
 public class Fly extends Module {
-    public Fly() {super("Fly", Module.Category.MOVEMENT);}
-
     Setting<Float> speed = register(
             new Setting(
                     "Speed",
@@ -16,6 +14,10 @@ public class Fly extends Module {
                     500f
             )
     );
+
+    public Fly() {
+        super("Fly", Module.Category.MOVEMENT);
+    }
 
     @Override
     public void onUpdate() {

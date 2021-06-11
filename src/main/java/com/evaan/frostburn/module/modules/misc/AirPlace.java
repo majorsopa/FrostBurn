@@ -18,7 +18,9 @@ public class AirPlace extends Module {
 
     private BlockPos placePos;
 
-    public AirPlace() {super("AirPlace", Category.MISC);}
+    public AirPlace() {
+        super("AirPlace", Category.MISC);
+    }
 
     @Override
     public void onUpdate() {
@@ -26,7 +28,8 @@ public class AirPlace extends Module {
 
             try {
                 placePos = ((BlockHitResult) mc.crosshairTarget).getBlockPos();
-            } catch (Exception ignored) {} //apparently if you look at an entity the game crashes
+            } catch (Exception ignored) {
+            } //apparently if you look at an entity the game crashes
 
             if (mc.world.getBlockState(placePos).getBlock() instanceof AirBlock) {
 

@@ -20,16 +20,15 @@ import java.util.Optional;
  * https://github.com/evaan
  */
 public class MiddleClick extends Module {
+    public ArrayList<String> modes = new ArrayList<>();
+    Setting<String> mode = register(new Setting("Mode", this, modes, "Friend"));
+    boolean pressed = false;
+
     public MiddleClick() {
         super("MiddleClick", Category.MISC);
         modes.add("Friend");
         modes.add("Pearl");
     }
-
-    public ArrayList<String> modes = new ArrayList<>();
-    Setting<String> mode = register(new Setting("Mode", this, modes, "Friend"));
-
-    boolean pressed = false;
 
     @Override
     public void onUpdate() {
@@ -55,7 +54,8 @@ public class MiddleClick extends Module {
                         break;
                     }
                 }
-                if (mc.crosshairTarget.getType() != HitResult.Type.BLOCK && mc.crosshairTarget.getType() != HitResult.Type.ENTITY) mc.interactionManager.interactItem(mc.player, mc.world, Hand.MAIN_HAND);
+                if (mc.crosshairTarget.getType() != HitResult.Type.BLOCK && mc.crosshairTarget.getType() != HitResult.Type.ENTITY)
+                    mc.interactionManager.interactItem(mc.player, mc.world, Hand.MAIN_HAND);
                 mc.player.getInventory().selectedSlot = oldSlot;
             }
         } else if (GLFW.glfwGetMouseButton(mc.getWindow().getHandle(), GLFW.GLFW_MOUSE_BUTTON_MIDDLE) == 0)

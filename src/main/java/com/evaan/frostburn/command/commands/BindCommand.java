@@ -10,7 +10,9 @@ import net.minecraft.client.util.InputUtil;
  * https://github.com/evaan
  */
 public class BindCommand extends Command {
-    public BindCommand() {super(new String[]{"bind", "b"});}
+    public BindCommand() {
+        super(new String[]{"bind", "b"});
+    }
 
     @Override
     public void onCommand(String[] args) {
@@ -25,8 +27,12 @@ public class BindCommand extends Command {
         }
         if (args[2].equalsIgnoreCase("r")) m.setBind(InputUtil.fromTranslationKey("key.keyboard.r").getCode());
         else {
-            try { m.setBind(InputUtil.fromTranslationKey("key.keyboard." + args[2].toLowerCase().replaceFirst("right", "right.").replaceFirst("r", "right.")).getCode()); }
-            catch (NumberFormatException e) { Command.sendMessage("Key not found!"); return; }
+            try {
+                m.setBind(InputUtil.fromTranslationKey("key.keyboard." + args[2].toLowerCase().replaceFirst("right", "right.").replaceFirst("r", "right.")).getCode());
+            } catch (NumberFormatException e) {
+                Command.sendMessage("Key not found!");
+                return;
+            }
         }
         sendMessage(m.getName() + " bound to " + args[2].toUpperCase());
     }

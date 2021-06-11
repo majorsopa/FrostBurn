@@ -7,5 +7,6 @@ import me.zero.alpine.type.Cancellable;
  * https://github.com/evaan
  */
 public class FrostBurnEvent extends Cancellable {
-    public FrostBurnEvent() {}
+    public FrostBurnEvent() {
+    }
 }

@@ -13,28 +13,28 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(FluidBlock.class)
 public abstract class MixinFluidBlock extends Block implements FluidDrainable {
 
-	public MixinFluidBlock(Settings settings) {
-		super(settings);
-	}
+    public MixinFluidBlock(Settings settings) {
+        super(settings);
+    }
 
-	@Override
+    @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		boolean sneaking = false;
-		boolean underwater = false;
-		boolean riding = false;
-		try {
-			ClientPlayerEntity player = FrostBurn.mc.player;
-			sneaking = player.isSneaking();
-			underwater = player.isSubmergedInWater();
-			riding = player.isRiding();
-		} catch (Exception e) {
-			return super.getCollisionShape(state, world, pos, context);
-		}
-		
-		if(ModuleManager.getModule("Jesus").isEnabled() && !sneaking && !underwater && !riding) {
-			return VoxelShapes.fullCube();
-		}
-		
-		return super.getCollisionShape(state, world, pos, context);
-	}
+        boolean sneaking = false;
+        boolean underwater = false;
+        boolean riding = false;
+        try {
+            ClientPlayerEntity player = FrostBurn.mc.player;
+            sneaking = player.isSneaking();
+            underwater = player.isSubmergedInWater();
+            riding = player.isRiding();
+        } catch (Exception e) {
+            return super.getCollisionShape(state, world, pos, context);
+        }
+
+        if (ModuleManager.getModule("Jesus").isEnabled() && !sneaking && !underwater && !riding) {
+            return VoxelShapes.fullCube();
+        }
+
+        return super.getCollisionShape(state, world, pos, context);
+    }
 }

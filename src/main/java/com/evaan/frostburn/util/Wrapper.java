@@ -2,6 +2,7 @@ package com.evaan.frostburn.util;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+
 /**
  * @author Gopro336
  */

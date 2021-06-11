@@ -18,14 +18,20 @@ import net.minecraft.util.math.Vec3d;
  * https://github.com/evaan
  */
 public class AutoStaircase extends Module {
-    public AutoStaircase() {super("AutoStaircase", Category.MISC);}
-
     Setting<Boolean> airPlace = register(new Setting("AirPlace", this, true));
+
+    public AutoStaircase() {
+        super("AutoStaircase", Category.MISC);
+    }
 
     @Override
     public void onUpdate() {
-        if (mc.player == null || mc.world == null) {disable(); return;}
-        if (!mc.player.isOnGround() || !(mc.player.getInventory().getMainHandStack().getItem() instanceof BlockItem)) return;
+        if (mc.player == null || mc.world == null) {
+            disable();
+            return;
+        }
+        if (!mc.player.isOnGround() || !(mc.player.getInventory().getMainHandStack().getItem() instanceof BlockItem))
+            return;
         BlockPos pos = mc.player.getBlockPos().offset(mc.player.getMovementDirection());
         switch (mc.player.getMovementDirection()) {
             case NORTH:
@@ -41,11 +47,12 @@ public class AutoStaircase extends Module {
                 mc.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, new Vec3d(mc.player.getX() - 1, mc.player.getY(), mc.player.getZ()));
                 break;
             default:
-            	break;
+                break;
         }
         if (mc.world.getBlockState(pos).getMaterial().isReplaceable()) {
             mc.options.keyForward.setPressed(false);
-            if (!airPlace.getValue()) mc.interactionManager.interactBlock(mc.player, mc.world, Hand.MAIN_HAND, new BlockHitResult(Vec3d.of(pos.down()), Direction.DOWN, pos, false));
+            if (!airPlace.getValue())
+                mc.interactionManager.interactBlock(mc.player, mc.world, Hand.MAIN_HAND, new BlockHitResult(Vec3d.of(pos.down()), Direction.DOWN, pos, false));
             mc.interactionManager.interactBlock(mc.player, mc.world, Hand.MAIN_HAND, new BlockHitResult(Vec3d.of(pos), Direction.DOWN, pos, false));
             mc.player.swingHand(Hand.MAIN_HAND);
         }

@@ -11,26 +11,29 @@ import com.evaan.frostburn.util.SettingsManager;
  * https://github.com/evaan
  */
 public class SettingCommand extends Command {
-    public SettingCommand() {super(new String[]{"setting", "set"});}
+    public SettingCommand() {
+        super(new String[]{"setting", "set"});
+    }
 
-	@Override
+    @Override
     public void onCommand(String[] args) {
         if (args.length != 4) {
-        	sendMessage("Usage: setting <Module> <Setting> <Value>"); 
-        	return;
+            sendMessage("Usage: setting <Module> <Setting> <Value>");
+            return;
         }
-        
+
         // Try to find module
         Module module = ModuleManager.getModule(args[1]);
         if (module == null) {
-        	sendMessage("Module not found!"); return;
+            sendMessage("Module not found!");
+            return;
         }
-        
+
         // Try to find the setting on the module
-		Setting setting = SettingsManager.getSetting(module, args[2]);
+        Setting setting = SettingsManager.getSetting(module, args[2]);
         if (setting == null) {
-        	sendMessage("Setting not found!");
-        	return;
+            sendMessage("Setting not found!");
+            return;
         } else {
             switch (setting.getType()) {
                 case BOOLEAN:
@@ -38,7 +41,7 @@ public class SettingCommand extends Command {
                     Command.sendMessage("Set " + setting.getName() + " to " + args[3]);
                     break;
                 case FLOAT:
-                    if ((float)setting.getMin() > Float.parseFloat(args[3]) || (float)setting.getMax() < Float.parseFloat(args[3])) {
+                    if ((float) setting.getMin() > Float.parseFloat(args[3]) || (float) setting.getMax() < Float.parseFloat(args[3])) {
                         Command.sendMessage("Min: " + setting.getMin() + ", Max: " + setting.getMax());
                         break;
                     }
@@ -46,7 +49,7 @@ public class SettingCommand extends Command {
                     Command.sendMessage("Set " + setting.getName() + " to " + args[3]);
                     break;
                 case INTEGER:
-                    if ((int)setting.getMin() > Integer.parseInt(args[3]) || (int)setting.getMax() < Integer.parseInt(args[3])) {
+                    if ((int) setting.getMin() > Integer.parseInt(args[3]) || (int) setting.getMax() < Integer.parseInt(args[3])) {
                         Command.sendMessage("Min: " + setting.getMin() + ", Max: " + setting.getMax());
                         break;
                     }

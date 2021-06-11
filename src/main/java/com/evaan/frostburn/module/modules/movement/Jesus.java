@@ -4,6 +4,8 @@ import com.evaan.frostburn.module.Module;
 
 public class Jesus extends Module {
 
-	public Jesus() {super("Jesus", Category.MOVEMENT);}
+    public Jesus() {
+        super("Jesus", Category.MOVEMENT);
+    }
 
 }

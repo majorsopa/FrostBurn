@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinInGameHud {
     @Inject(at = @At(value = "RETURN"), method = "render", cancellable = true)
     public void render(MatrixStack matrixStack, float float_1, CallbackInfo info) {
-        ModuleManager.modules.stream().filter(Module::isEnabled).forEach(module -> {module.onRender1(matrixStack);});
+        ModuleManager.modules.stream().filter(Module::isEnabled).forEach(module -> {
+            module.onRender1(matrixStack);
+        });
     }
 }

@@ -67,12 +67,12 @@ public class ModuleManager {
         }
         return cat;
     }
-    
+
     public static ArrayList<String> getModuleNames() {
-    	ArrayList<String> names = new ArrayList<>();
-    	for (Module module : modules) {
+        ArrayList<String> names = new ArrayList<>();
+        for (Module module : modules) {
             names.add(module.getName());
         }
-    	return names;
+        return names;
     }
 }

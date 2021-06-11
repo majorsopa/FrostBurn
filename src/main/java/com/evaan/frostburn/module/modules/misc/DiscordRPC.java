@@ -10,12 +10,15 @@ import net.arikia.dev.drpc.DiscordRichPresence;
  * https://github.com/evaan
  */
 public class DiscordRPC extends Module {
-    public DiscordRPC() {super("DiscordRPC", Category.MISC);}
+    public DiscordRPC() {
+        super("DiscordRPC", Category.MISC);
+    }
 
     @Override
     public void onEnable() {
         String clientVersion = FrostBurn.clientVersionString;
-        net.arikia.dev.drpc.DiscordRPC.discordInitialize("820481496962826291", new DiscordEventHandlers.Builder().setReadyEventHandler(user -> {}).build(), true);
+        net.arikia.dev.drpc.DiscordRPC.discordInitialize("820481496962826291", new DiscordEventHandlers.Builder().setReadyEventHandler(user -> {
+        }).build(), true);
         net.arikia.dev.drpc.DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder(getIP()).setBigImage("logo", clientVersion).build());
     }
 
